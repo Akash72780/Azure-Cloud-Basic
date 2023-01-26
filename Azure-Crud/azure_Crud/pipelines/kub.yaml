@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: javanxt
+  namespace: AzureStorage-Akash(M1085107)
+  labels: 
+    app: javanxt
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: javanxt
+  template: 
+    metadata:
+      labels: 
+        app: javanxt
+    spec: 
+      containers: 
+        - name: AzureStorage-Akash(M1085107)
+          image: prdctmntc.azurecr.io/AzureStorage-Akash(M1085107):#{Release.Artifacts.AzureStorage - Akash.BuildId}#
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: javanxt
+spec: 
+  type: LoadBalancer
+  ports: 
+    - name: java
+      port: 8080
+  selector:
+    app: javanxt
